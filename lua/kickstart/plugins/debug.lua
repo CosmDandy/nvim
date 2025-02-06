@@ -22,7 +22,14 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    -- 'leoluz/nvim-dap-go',
+    {
+      'mfussenegger/nvim-dap-python',
+      ft = 'python',
+      config = function(_, opts)
+        local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+      end,
+    },
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
