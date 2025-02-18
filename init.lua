@@ -1,8 +1,24 @@
+-- [[Graphite Keymaps]]
+vim.api.nvim_set_keymap('n', 'y', 'h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'h', 'j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'a', 'k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'e', 'l', { noremap = true, silent = true })
+
+-- vim.api.nvim_set_keymap('v', 'y', 'h', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('v', 'h', 'j', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('v', 'a', 'k', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('v', 'e', 'l', { noremap = true, silent = true })
+
+-- vim.api.nvim_set_keymap('n', 'h', 'y', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'k', 'a', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'l', 'e', { noremap = true, silent = true })
+
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
+vim.g.have_nerd_font = false
 
 -- Make line numbers default
 vim.opt.number = true
@@ -58,7 +74,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 7
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -79,19 +95,25 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- [[ Graphite Keymaps ]]
+vim.keymap.set('n', '<C-y>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-e>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-h>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-a>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -119,30 +141,71 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
--- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  'ryanoasis/vim-devicons',
+  -- 'ryanoasis/vim-devicons',
+  -- {
+  --   "folke/snacks.nvim",
+  --   priority = 1000,
+  --   lazy = false,
+  --   ---@type snacks.Config
+  --   opts = {
+  --     bigfile = { enabled = true },
+  --     dashboard = {
+  --       sections = {
+  --         { section = "keys",   gap = 1, padding = 1 },
+  --         { section = "startup" },
+  --       },
+  --     },
+  --     explorer = { enabled = true },
+  --     indent = { enabled = true },
+  --     input = { enabled = true },
+  --     picker = { enabled = true },
+  --     notifier = { enabled = true },
+  --     quickfile = { enabled = true },
+  --     scope = { enabled = true },
+  --     scroll = { enabled = false },
+  --     statuscolumn = { enabled = true },
+  --     words = { enabled = true },
+  --   },
+  -- },
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   version = '*',
+  --   dependencies = 'nvim-tree/nvim-web-devicons',
+  -- },
+
+  -- lazy.nvim
   {
-    'akinsho/bufferline.nvim',
-    version = '*',
-    dependencies = 'nvim-tree/nvim-web-devicons',
-  },
-  -- Adds git related signs to the gutter, as well as utilities for managing changes
-  {
-    'lewis6991/gitsigns.nvim',
+    "folke/noice.nvim",
+    event = "VeryLazy",
     opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
-
   {                     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
@@ -473,6 +536,8 @@ require('lazy').setup({
         'black',
         'pyright',
         'debugpy',
+        'docker-compose-language-service',
+        'dockerfile-language-server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -597,13 +662,13 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          -- ['<C-y>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -618,12 +683,12 @@ require('lazy').setup({
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
+          ['<C-e>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          ['<C-y>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end
@@ -651,16 +716,14 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'nyoom-engineering/oxocarbon.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+    --
+    -- 'nyoom-engineering/oxocarbon.nvim',
+    "craftzdog/solarized-osaka.nvim",
+    lazy = true,
+    priority = 1000,
+    -- Make sure to load this before all the other start plugins.
     init = function()
-      vim.cmd.colorscheme 'oxocarbon'
-      -- local hour = tonumber(os.date '%H')
-      -- if hour >= 6 and hour < 18 then
-      --   vim.opt.background = 'light'
-      -- else
-      --   vim.opt.background = 'dark'
-      -- end
+      vim.cmd.colorscheme 'solarized-osaka'
       vim.cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
       vim.cmd [[highlight NormalNC guibg=NONE ctermbg=NONE]]
       vim.cmd [[highlight EndOfBuffer guibg=NONE ctermbg=NONE]]
@@ -716,8 +779,29 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs',
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'python', 'json', 'bash', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query' },
-      -- Autoinstall languages that are not installed
+      ensure_installed = {
+        'python',
+        'sql',
+        'json',
+        'csv',
+        'bash',
+        'html',
+        'css',
+        'javascript',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'gitignore',
+        'rust',
+        'query',
+        'dockerfile',
+        'yaml',
+        'toml',
+        'xml',
+        'graphql',
+        'regex',
+      }, -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
         enable = true,
